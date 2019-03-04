@@ -4,6 +4,7 @@
 // 自作VSTのヘッダファイルをインクルード
 #include "fuidlist.h"
 #include "processor.h"
+#include "controller.h"
 
 #define MYVST_VENDOR   "amool"
 
@@ -45,5 +46,16 @@ BEGIN_FACTORY_DEF(MYVST_VENDOR, MYVST_URL, MYVST_EMAIL)
 		MYVST_VERSION,
 		kVstVersionString,
 		Steinberg::Vst::MyVSTProcessor::createInstance)
+
+	// Controllerクラスの作成を行う
+	DEF_CLASS2(INLINE_UID_FROM_FUID(Steinberg::Vst::ControllerUID),
+		PClassInfo::kManyInstances,
+		kVstComponentControllerClass,
+		MYVST_VSTNAME " Controller",	// 自作VSTの名前に"Controller"を付与したもの。
+		0,						    // 使わないので必ず0にする
+		"",						    // 使わないので必ず""にする
+		MYVST_VERSION,
+		kVstVersionString,
+		Steinberg::Vst::MyVSTController::createInstance)
 
 END_FACTORY
