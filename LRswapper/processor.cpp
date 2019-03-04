@@ -3,7 +3,6 @@
 #include "processor.h"
 
 
-// VST3作成に必要なの名前空間を使用
 namespace Steinberg {
 	namespace Vst {
 
@@ -13,7 +12,7 @@ namespace Steinberg {
 		// ===================================================================================
 		tresult PLUGIN_API MyVSTProcessor::initialize(FUnknown* context)
 		{
-			// まず継承元クラスの初期化を実施
+			// 継承元クラス初期化
 			tresult result = AudioEffect::initialize(context);
 			if (result == kResultTrue)
 			{
@@ -21,19 +20,19 @@ namespace Steinberg {
 				addAudioInput(STR16("AudioInput"), SpeakerArr::kStereo);
 				addAudioOutput(STR16("AudioOutput"), SpeakerArr::kStereo);
 
-				// 以下固有の初期化を実施。
+				// その他の初期化
 
-				// 今回は何もしない
+				
 			}
 
 
-			// 初期化が成功すればkResultTrueを返す。
+			
 			return result;
 		}
 
 		tresult PLUGIN_API MyVSTProcessor::setBusArrangements(SpeakerArrangement* inputs, int32 numIns, SpeakerArrangement* outputs, int32 numOuts)
 		{
-			// inputとoutputのバスが1つずつで、かつinputとoutputの構成がステレオの場合
+			//バス構成
 			if (numIns == 1 && numOuts == 1 && inputs[0] == SpeakerArr::kStereo && outputs[0] == SpeakerArr::kStereo)
 			{
 				return AudioEffect::setBusArrangements(inputs, numIns, outputs, numOuts);
@@ -65,9 +64,9 @@ namespace Steinberg {
 				outR[i] = inR[i];
 			}
 
-			// 問題なければkResultTrueを返す(おそらく必ずkResultTrueを返す)
+			
 			return kResultTrue;
 		}
 
 	}
-} // namespace SteinbergとVstの終わり
+} 
