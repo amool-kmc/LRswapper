@@ -76,10 +76,10 @@ namespace Steinberg {
 							// tagÇ≤Ç∆ÇÃílìnÇµÅAèàóù
 							switch (tag)
 							{
-							case L_VOLUM:
+							case L_VOLUME_TAG:
 								Lvolume = value;
 								break;
-							case R_VOLUM:
+							case R_VOLUME_TAG:
 								Rvolume = value;
 								break;
 							}

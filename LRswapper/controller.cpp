@@ -16,8 +16,8 @@ namespace Steinberg {
 			if (result == kResultTrue)
 			{
 				// パラメーターを追加
-				parameters.addParameter(STR16("param1"), STR16("..."), 0, 1, ParameterInfo::kCanAutomate, L_VOLUM);
-				parameters.addParameter(STR16("param1"), STR16("..."), 0, 1, ParameterInfo::kCanAutomate, R_VOLUM);
+				parameters.addParameter(STR16("param1"), STR16("..."), 0, 1, ParameterInfo::kCanAutomate, L_VOLUME_TAG);
+				parameters.addParameter(STR16("param1"), STR16("..."), 0, 1, ParameterInfo::kCanAutomate, R_VOLUME_TAG);
 
 
 				// 以下固有の初期化を実施。
