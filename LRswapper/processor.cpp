@@ -1,6 +1,7 @@
 // include original file
 #include "fuidlist.h"
 #include "processor.h"
+#include "controller.h"
 
 
 namespace Steinberg {
@@ -50,6 +51,42 @@ namespace Steinberg {
 		// ===================================================================================
 		tresult PLUGIN_API MyVSTProcessor::process(ProcessData& data)
 		{
+			// パラメーター変更時の処理
+			if (data.inputParameterChanges != NULL) {
+				// 入力パラメーター数取得
+				int32 paramChangeCount = data.inputParameterChanges->getParameterCount();
+
+				// 入力パラメーター数だけ処理
+				for (int32 i = 0; i < paramChangeCount; i++) {
+					// 変更パラメーターの種類の情報キュー
+					IParamValueQueue* queue = data.inputParameterChanges->getParameterData(i);
+
+					if (queue != NULL) {
+						// パラメーターtag取得
+						int32 tag = queue->getParameterId();
+						// 変更回数
+						int32 valueCgangeCount = queue->getPointCount();
+
+						// パラメーターの値とオフセット
+						ParamValue value;
+						int32 sampleOffset;
+
+						// 最後の値のみ取得する
+						if (queue->getPoint(valueCgangeCount - 1, sampleOffset, value)) {
+							// tagごとの値渡し、処理
+							switch (tag)
+							{
+							case L_VOLUM:
+								Lvolume = value;
+								break;
+							case R_VOLUM:
+								Rvolume = value;
+								break;
+							}
+						}
+					}
+				}
+			}
 			// 入力・出力バッファのポインタ
 			Sample32* inL = data.inputs[0].channelBuffers32[0];
 			Sample32* inR = data.inputs[0].channelBuffers32[1];

@@ -1,6 +1,6 @@
 // include VST3 SDK
 #include "public.sdk/source/vst/vstaudioeffect.h"
-
+#include "pluginterfaces/vst/ivstparameterchanges.h"
 
 namespace Steinberg {
 	namespace Vst {
@@ -10,6 +10,9 @@ namespace Steinberg {
 		// ===================================================================================
 		class MyVSTProcessor : public AudioEffect
 		{
+		protected:
+			ParamValue Lvolume;
+			ParamValue Rvolume;
 		public:
 			// èâä˙âªä÷êî
 			tresult PLUGIN_API initialize(FUnknown* context);
