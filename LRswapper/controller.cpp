@@ -16,8 +16,13 @@ namespace Steinberg {
 			if (result == kResultTrue)
 			{
 				// パラメーターを追加
-				parameters.addParameter(STR16("param1"), STR16("..."), 0, 1, ParameterInfo::kCanAutomate, L_VOLUME_TAG);
-				parameters.addParameter(STR16("param1"), STR16("..."), 0, 1, ParameterInfo::kCanAutomate, R_VOLUME_TAG);
+				// output gain
+				RangeParameter* Lvolume = new RangeParameter(STR16("Lvolume"), L_VOLUME_TAG, STR16(""), -20.0f, 10.0f, 0.0f);
+				RangeParameter* Rvolume = new RangeParameter(STR16("Rvolume"), L_VOLUME_TAG, STR16(""), -20.0f, 10.0f, 0.0f);
+
+				//pan
+				RangeParameter* Lpan = new RangeParameter(STR16("Lpan"), L_VOLUME_TAG, STR16(""), -1.0f, 1.0f, -1.0f);
+				RangeParameter* Rpan = new RangeParameter(STR16("Rpan"), L_VOLUME_TAG, STR16(""), -1.0f, 1.0f, 1.0f);
 
 
 				// 以下固有の初期化を実施。
