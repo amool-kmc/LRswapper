@@ -11,6 +11,8 @@ namespace Steinberg {
 		// コンストラクタ
 		// =================================================================================
 		MyVSTProcessor::MyVSTProcessor()
+			//初期値
+			:Lvolume(1.0f), Rvolume(1.0f), Lpan(1.0f), Rpan(1.0f)
 		{
 			// コントローラーのFUIDを設定
 			setControllerClass(ControllerUID);
@@ -80,15 +82,15 @@ namespace Steinberg {
 						int32 sampleOffset;
 
 						// 最後の値のみ取得する
-						if (queue->getPoint(valueCgangeCount - 1, sampleOffset, value)) {
+						if (queue->getPoint(valueCgangeCount - 1, sampleOffset, value) == kResultTrue) {
 							// tagごとの値渡し、処理(そのまま渡したら規格化されたまま)
 							switch (tag)
 							{
 							case L_VOLUME_TAG:
-								Lvolume = value;
+								Lvolume = value * (3.0f / 2.0f); // 0~1.5
 								break;
 							case R_VOLUME_TAG:
-								Rvolume = value;
+								Rvolume = value * (3.0f / 2.0f); // 0~1.5
 								break;
 							case L_PAN_TAG:
 								Lpan = -(value - 1); // 0~1
@@ -111,11 +113,11 @@ namespace Steinberg {
 				Sample32 inLoutL, inLoutR, inRoutL, inRoutR;
 				inLoutL = Lpan * inL[i];
 				inLoutR = -(Lpan - 1) * inL[i];
-				inRoutL = -(Rpan - 1)*inR[i];
+				inRoutL = -(Rpan - 1) * inR[i];
 				inRoutR = Rpan * inR[i];
 
-				outL[i] = inLoutL + inRoutL;
-				outR[i] = inLoutR + inRoutR;
+				outL[i] = Lvolume * (inLoutL + inRoutL);
+				outR[i] = Rvolume * (inLoutR + inRoutR);
 			}
 
 			
