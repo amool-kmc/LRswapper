@@ -13,6 +13,8 @@ namespace Steinberg {
 		protected:
 			ParamValue Lvolume;
 			ParamValue Rvolume;
+			ParamValue Lpan;
+			ParamValue Rpan;
 		public:
 			// ‰Šú‰»ŠÖ”
 			tresult PLUGIN_API initialize(FUnknown* context);

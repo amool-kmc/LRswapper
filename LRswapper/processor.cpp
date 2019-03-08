@@ -73,7 +73,7 @@ namespace Steinberg {
 
 						// ÅŒã‚Ì’l‚Ì‚İæ“¾‚·‚é
 						if (queue->getPoint(valueCgangeCount - 1, sampleOffset, value)) {
-							// tag‚²‚Æ‚Ì’l“n‚µAˆ—
+							// tag‚²‚Æ‚Ì’l“n‚µAˆ—(‚»‚Ì‚Ü‚Ü“n‚µ‚½‚ç‹KŠi‰»‚³‚ê‚½‚Ü‚Ü)
 							switch (tag)
 							{
 							case L_VOLUME_TAG:
@@ -82,6 +82,10 @@ namespace Steinberg {
 							case R_VOLUME_TAG:
 								Rvolume = value;
 								break;
+							case L_PAN_TAG:
+								Lpan = value;
+							case R_PAN_TAG:
+								Rpan = value;
 							}
 						}
 					}
