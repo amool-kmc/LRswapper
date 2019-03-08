@@ -94,8 +94,10 @@ namespace Steinberg {
 								break;
 							case L_PAN_TAG:
 								Lpan = -(value - 1); // 0~1
+								break;
 							case R_PAN_TAG:
 								Rpan = value; // 0~1
+								break;
 							}
 						}
 					}
