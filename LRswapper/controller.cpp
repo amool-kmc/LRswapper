@@ -21,8 +21,8 @@ namespace Steinberg {
 				RangeParameter* Rvolume = new RangeParameter(STR16("Rvolume"), L_VOLUME_TAG, STR16(""), -20.0f, 10.0f, 0.0f);
 
 				//pan
-				RangeParameter* Lpan = new RangeParameter(STR16("Lpan"), L_PAN_TAG, STR16(""), -1.0f, 1.0f, -1.0f);
-				RangeParameter* Rpan = new RangeParameter(STR16("Rpan"), R_PAN_TAG, STR16(""), -1.0f, 1.0f, 1.0f);
+				RangeParameter* Lpan = new RangeParameter(STR16("Lpan"), L_PAN_TAG, STR16(""), -100.0f, 100.0f, -100.0f);
+				RangeParameter* Rpan = new RangeParameter(STR16("Rpan"), R_PAN_TAG, STR16(""), -100.0f, 100.0f, 100.0f);
 
 
 				// à»â∫å≈óLÇÃèâä˙âªÇé¿é{ÅB

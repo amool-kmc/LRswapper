@@ -83,9 +83,9 @@ namespace Steinberg {
 								Rvolume = value;
 								break;
 							case L_PAN_TAG:
-								Lpan = value;
+								Lpan = -(value - 1); // 0~1
 							case R_PAN_TAG:
-								Rpan = value;
+								Rpan = value; // 0~1
 							}
 						}
 					}
@@ -100,8 +100,14 @@ namespace Steinberg {
 			// numSamples‚Å¦‚³‚ê‚éƒTƒ“ƒvƒ‹•ªA‰¹º‚ğˆ—‚·‚é
 			for (int32 i = 0; i < data.numSamples; i++)
 			{
-				outL[i] = inL[i];
-				outR[i] = inR[i];
+				Sample32 inLoutL, inLoutR, inRoutL, inRoutR;
+				inLoutL = Lpan * inL[i];
+				inLoutR = -(Lpan - 1) * inL[i];
+				inRoutL = -(Rpan - 1)*inR[i];
+				inRoutR = Rpan * inR[i];
+
+				outL[i] = inLoutL + inRoutL;
+				outR[i] = inLoutR + inRoutR;
 			}
 
 			
