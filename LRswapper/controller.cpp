@@ -15,7 +15,7 @@ namespace Steinberg {
 			tresult result = EditController::initialize(context);
 			if (result == kResultTrue)
 			{
-				// パラメーターを追加
+				// パラメーターを作成
 				// output gain
 				RangeParameter* Lvolume = new RangeParameter(STR16("Lvolume"), L_VOLUME_TAG, STR16(""), -20.0f, 10.0f, 0.0f);
 				RangeParameter* Rvolume = new RangeParameter(STR16("Rvolume"), L_VOLUME_TAG, STR16(""), -20.0f, 10.0f, 0.0f);
@@ -25,6 +25,11 @@ namespace Steinberg {
 				RangeParameter* Rpan = new RangeParameter(STR16("Rpan"), R_PAN_TAG, STR16(""), -100.0f, 100.0f, 100.0f);
 
 
+				// 上で作成したパラメーターを追加
+				parameters.addParameter(Lvolume);
+				parameters.addParameter(Rvolume);
+				parameters.addParameter(Lpan);
+				parameters.addParameter(Rpan);
 				// 以下固有の初期化を実施。
 				
 			}
