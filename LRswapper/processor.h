@@ -16,6 +16,9 @@ namespace Steinberg {
 			ParamValue Lpan;
 			ParamValue Rpan;
 		public:
+			// コンストラクタ
+			MyVSTProcessor();
+
 			// 初期化関数
 			tresult PLUGIN_API initialize(FUnknown* context);
 
