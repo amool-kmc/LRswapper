@@ -18,7 +18,7 @@ namespace Steinberg {
 				// パラメーターを作成
 				// output gain
 				RangeParameter* Lvolume = new RangeParameter(STR16("Lvolume"), L_VOLUME_TAG, STR16(""), -20.0f, 10.0f, 0.0f);
-				RangeParameter* Rvolume = new RangeParameter(STR16("Rvolume"), L_VOLUME_TAG, STR16(""), -20.0f, 10.0f, 0.0f);
+				RangeParameter* Rvolume = new RangeParameter(STR16("Rvolume"), R_VOLUME_TAG, STR16(""), -20.0f, 10.0f, 0.0f);
 
 				//pan
 				RangeParameter* Lpan = new RangeParameter(STR16("Lpan"), L_PAN_TAG, STR16(""), -100.0f, 100.0f, -100.0f);
