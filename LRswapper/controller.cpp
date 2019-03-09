@@ -39,6 +39,41 @@ namespace Steinberg {
 			return result;
 		}
 
+		// ===================================================================================
+		// processorクラスの状態を読み込む関数
+		// ===================================================================================
+		tresult PLUGIN_API MyVSTController::setComponentState(IBStream* state)
+		{
+
+			tresult res;
+
+			// 保存されているデータを読み込む
+			// 保存されているデータが複数ある場合はstate->readを繰り返す
+			ParamValue Lvolume, Rvolume, Lpan, Rpan;
+			res = state->read(&Lvolume, sizeof(ParamValue));
+			res = state->read(&Rvolume, sizeof(ParamValue));
+			res = state->read(&Lpan, sizeof(ParamValue));
+			res = state->read(&Rpan, sizeof(ParamValue));
+			if (res != kResultOk)
+			{
+				// 読込に失敗した場合はkResultFalseを返す。
+				return kResultFalse;
+			}
+
+			// 読み込まれたデータをパラメータに反映する
+			// 反映するデータは0.0～1.0の範囲にしておく
+			Lvolume = plainParamToNormalized(L_VOLUME_TAG, Lvolume);
+			setParamNormalized(L_VOLUME_TAG, Lvolume);
+			Rvolume = plainParamToNormalized(R_VOLUME_TAG, Rvolume);
+			setParamNormalized(R_VOLUME_TAG, Rvolume);
+			Lpan = plainParamToNormalized(L_PAN_TAG, Lpan);
+			setParamNormalized(L_PAN_TAG, Lpan);
+			Rpan = plainParamToNormalized(R_PAN_TAG, Rpan);
+			setParamNormalized(R_PAN_TAG, Rpan);
+
+			// 関数の処理に問題がなければkResultOkを返す
+			return kResultOk;
+		}
 
 	}
 }

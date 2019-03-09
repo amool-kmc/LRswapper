@@ -57,6 +57,43 @@ namespace Steinberg {
 		}
 
 		// ===================================================================================
+		// 状態を読み込む関数
+		// ===================================================================================
+		tresult PLUGIN_API MyVSTProcessor::setState(IBStream* state)
+		{
+			// 保存データを読み込む
+			// 保存データが複数ある場合はstate->readを繰り返す
+			tresult res;
+			res = state->read(&Lvolume, sizeof(ParamValue));
+			res = state->read(&Rvolume, sizeof(ParamValue));
+			res = state->read(&Lpan, sizeof(ParamValue));
+			res = state->read(&Rpan, sizeof(ParamValue));
+			if (res != kResultOk)
+			{
+				// 読込に失敗した場合はkResultFalseを返す。
+				return kResultFalse;
+			}
+
+			return kResultOk;
+		}
+
+		// ===================================================================================
+		// 状態を保存する関数
+		// ===================================================================================
+		tresult PLUGIN_API MyVSTProcessor::getState(IBStream* state)
+		{
+			// データを保存する
+			// 保存したいデータが複数ある場合はstate->writeを繰り返す。
+			state->write(&Lvolume, sizeof(ParamValue));
+			state->write(&Rvolume, sizeof(ParamValue));
+			state->write(&Lpan, sizeof(ParamValue));
+			state->write(&Rpan, sizeof(ParamValue));
+
+			// 関数の処理に問題がなければkResultOkを返す
+			return kResultOk;
+		}
+
+		// ===================================================================================
 		// 音声信号を処理する関数
 		// ===================================================================================
 		tresult PLUGIN_API MyVSTProcessor::process(ProcessData& data)

@@ -1,5 +1,6 @@
 // include VST3 SDK file
 #include "public.sdk/source/vst/vsteditcontroller.h"
+#include "pluginterfaces/base/ibstream.h"
 
 
 // include original file
@@ -19,6 +20,9 @@ namespace Steinberg {
 		public:
 			// クラス初期化関数
 			tresult PLUGIN_API initialize(FUnknown* context);
+
+			// Processorクラスの保存状態を反映させる関数
+			tresult PLUGIN_API setComponentState(IBStream* state);
 
 			// 自作Controllerクラスのインスタンスを作成するための関数
 			static FUnknown* createInstance(void*) { return (IEditController*)new MyVSTController(); }
