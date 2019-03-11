@@ -120,20 +120,20 @@ namespace Steinberg {
 
 						// 最後の値のみ取得する
 						if (queue->getPoint(valueCgangeCount - 1, sampleOffset, value) == kResultTrue) {
-							// tagごとの値渡し、処理(そのまま渡したら規格化されたまま)
+							// tagごとの値渡し、処理(そのまま渡したら規格化されたまま)読み書きを考えるとパラメーターの値に戻すべきか
 							switch (tag)
 							{
 							case L_VOLUME_TAG:
-								Lvolume = value * (3.0f / 2.0f); // 0~1.5
+								Lvolume = value * 30 - 20; // -20~10
 								break;
 							case R_VOLUME_TAG:
-								Rvolume = value * (3.0f / 2.0f); // 0~1.5
+								Rvolume = value * 30 - 20; // -20~10
 								break;
 							case L_PAN_TAG:
-								Lpan = -(value - 1); // 0~1
+								Lpan = value * 200 - 100; // -100~100
 								break;
 							case R_PAN_TAG:
-								Rpan = value; // 0~1
+								Rpan = value * 200 - 100; // -100~100
 								break;
 							}
 						}
@@ -150,13 +150,13 @@ namespace Steinberg {
 			for (int32 i = 0; i < data.numSamples; i++)
 			{
 				Sample32 inLoutL, inLoutR, inRoutL, inRoutR;
-				inLoutL = Lpan * inL[i];
-				inLoutR = -(Lpan - 1) * inL[i];
-				inRoutL = -(Rpan - 1) * inR[i];
-				inRoutR = Rpan * inR[i];
+				inLoutR = ((Lpan + 100) / 200) * inL[i];
+				inLoutL = -((Lpan + 100) / 200 - 1) * inL[i];
+				inRoutL = -((Rpan + 100) / 200 - 1) * inR[i];
+				inRoutR = ((Rpan + 100) / 200) * inR[i];
 
-				outL[i] = Lvolume * (inLoutL + inRoutL);
-				outR[i] = Rvolume * (inLoutR + inRoutR);
+				outL[i] = ((Lvolume + 20) / 20) * (inLoutL + inRoutL);
+				outR[i] = ((Rvolume + 20) / 20) * (inLoutR + inRoutR);
 			}
 
 			
