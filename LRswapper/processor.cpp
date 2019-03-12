@@ -12,7 +12,7 @@ namespace Steinberg {
 		// =================================================================================
 		MyVSTProcessor::MyVSTProcessor()
 			//初期値
-			:Lvolume(1.0f), Rvolume(1.0f), Lpan(1.0f), Rpan(1.0f)
+			:Lvolume(0.0f), Rvolume(0.0f), Lpan(-100.0f), Rpan(100.0f)
 		{
 			// コントローラーのFUIDを設定
 			setControllerClass(ControllerUID);
