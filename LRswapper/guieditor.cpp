@@ -1,6 +1,9 @@
 // include original file
 #include "guieditor.h"
 
+// ŠëŒ¯‚©‚à‚µ‚ê‚È‚¢
+using namespace VSTGUI;
+
 namespace Steinberg {
 	namespace Vst {
 		// =================================================================================
