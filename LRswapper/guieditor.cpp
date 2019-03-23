@@ -14,7 +14,7 @@ namespace Steinberg {
 		{
 			// ウィンドウサイズを設定
 			// 設定しなければ、ウィンドウが開かない
-			ViewRect viewRect(0, 0, 200, 200);
+			ViewRect viewRect(0, 0, H_WINDOWSIZE, V_WINDOWSIZE);
 			setRect(viewRect);
 		}
 
@@ -30,7 +30,7 @@ namespace Steinberg {
 			if (frame) { return false; }
 
 			// 作成するフレームのサイズを設定（基本的にGUIウィンドウと同じ）
-			CRect size(0, 0, 200, 200);
+			CRect size(0, 0, H_WINDOWSIZE, V_WINDOWSIZE);
 
 			// フレームを作成。作成に失敗したら(NULLなら)終了。
 			// 引数には、フレームサイズ、自作GUIクラスのポインタを指定する
