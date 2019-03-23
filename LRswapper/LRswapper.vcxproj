@@ -156,13 +156,19 @@
     <ClCompile Include="..\..\..\VST_SDK\VST3_SDK\public.sdk\source\main\dllmain.cpp" />
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="factory.cpp" />
+    <ClCompile Include="guieditor.cpp" />
     <ClCompile Include="processor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controller.h" />
     <ClInclude Include="fuidlist.h" />
+    <ClInclude Include="guieditor.h" />
     <ClInclude Include="processor.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="tag.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

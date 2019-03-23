@@ -5,6 +5,7 @@
 
 // include original file
 #include "tag.h"
+#include "guieditor.h"
 
 
 // VST3作成に必要な名前空間を使用
@@ -23,6 +24,9 @@ namespace Steinberg {
 
 			// Processorクラスの保存状態を反映させる関数
 			tresult PLUGIN_API setComponentState(IBStream* state);
+
+			// 自作VST GUIEditorを作成する関数
+			IPlugView* PLUGIN_API createView(const char* name);
 
 			// 自作Controllerクラスのインスタンスを作成するための関数
 			static FUnknown* createInstance(void*) { return (IEditController*)new MyVSTController(); }
