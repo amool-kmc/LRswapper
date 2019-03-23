@@ -31,6 +31,10 @@ namespace Steinberg {
 			// GUIウィンドウのコントローラを操作したときに呼び出される関数
 			void valueChanged(VSTGUI::CControl* pControl);
 
+
+			// スライダー作成関数
+			void createSlider(ParamID tag, int x, int y);
+
 			// VSTGUIEditorクラスの各種設定を自作GUIクラス置き換えるマクロ
 			DELEGATE_REFCOUNT(VSTGUIEditor)
 		};
