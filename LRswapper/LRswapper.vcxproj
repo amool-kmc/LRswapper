@@ -164,10 +164,11 @@
     <ClInclude Include="fuidlist.h" />
     <ClInclude Include="guieditor.h" />
     <ClInclude Include="processor.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="tag.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resouse.rc" />
+    <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

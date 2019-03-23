@@ -75,5 +75,19 @@ namespace Steinberg {
 			return kResultOk;
 		}
 
+		// ===================================================================================
+		// 自作VSTGUIEditorを作成する関数
+		// ===================================================================================
+		IPlugView* PLUGIN_API MyVSTController::createView(const char* name)
+		{
+			// editorを指定された場合
+			if (strcmp(name, "editor") == 0)
+			{
+				// 自作GUIクラスのインスタンスを作成し返す
+				MyVSTGUIEditor* view = new MyVSTGUIEditor(this);
+				return view;
+			}
+			return 0;
+		}
 	}
 }
