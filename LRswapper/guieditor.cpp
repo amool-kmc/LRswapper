@@ -47,12 +47,10 @@ namespace Steinberg {
 
 
 			// コントローラーUIの追加---------------------------------
-			
-			createSlider(R_PAN_TAG, 150, 115);
-			createSlider(L_PAN_TAG, 150, 165);
-			
-			//createSlider(L_VOLUME_TAG, 150, 100);
-			//createSlider(R_VOLUME_TAG, 150, 150);
+			createSlider(L_VOLUME_TAG, 150, 100);
+			createSlider(R_VOLUME_TAG, 150, 150);
+			createSlider(L_PAN_TAG, 150, 200);
+			createSlider(R_PAN_TAG, 150, 250);
 
 			// GUIウィンドウのオープンに成功した場合はtrueを返す
 			return true;
@@ -113,10 +111,6 @@ namespace Steinberg {
 				x + bmpmargin,
 				x + backbmp->getWidth() - (handlebmp->getWidth() + bmpmargin),
 				handlebmp, backbmp);
-
-			
-			//右最大値に変更
-			control->setStyle(CSlider::Style::kLeft | CSlider::Style::kHorizontal);
 
 			// パラメータの現在の値を取得し、コントローラに反映
 			ParamValue value = controller->getParamNormalized(tag);
