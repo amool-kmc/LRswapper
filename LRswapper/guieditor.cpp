@@ -49,7 +49,8 @@ namespace Steinberg {
 			// コントローラーUIの追加---------------------------------
 			createHSlider(R_PAN_TAG, 150, 127);
 			createHSlider(L_PAN_TAG, 150, 177);
-
+			createVSlider(R_VOLUME_TAG, 690, 265);
+			createVSlider(L_VOLUME_TAG, 290, 265);
 
 			// GUIウィンドウのオープンに成功した場合はtrueを返す
 			return true;
@@ -138,7 +139,7 @@ namespace Steinberg {
 			CBitmap *handlebmp = new CBitmap("vslider_handle.png");
 
 			// 画像サイズ取得
-			CRect  size;
+			CRect size;
 			size(0, 0, backbmp->getWidth(), backbmp->getHeight());
 			size.offset(x, y);   // 位置を設定(tergetframeの左上が0,0となる)
 
