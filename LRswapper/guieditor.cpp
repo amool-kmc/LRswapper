@@ -47,10 +47,9 @@ namespace Steinberg {
 
 
 			// コントローラーUIの追加---------------------------------
-			createSlider(L_VOLUME_TAG, 150, 100);
-			createSlider(R_VOLUME_TAG, 150, 150);
-			createSlider(L_PAN_TAG, 150, 200);
-			createSlider(R_PAN_TAG, 150, 250);
+			createHSlider(R_PAN_TAG, 150, 127);
+			createHSlider(L_PAN_TAG, 150, 177);
+
 
 			// GUIウィンドウのオープンに成功した場合はtrueを返す
 			return true;
@@ -91,9 +90,9 @@ namespace Steinberg {
 		}
 
 		// =================================================================================
-		// スライダー作成関数
+		// 横型スライダー作成関数
 		// =================================================================================
-		void MyVSTGUIEditor::createSlider(ParamID tag, int x, int y)
+		void MyVSTGUIEditor::createHSlider(ParamID tag, int x, int y)
 		{
 			// 画像ファイルを読み込み
 			CBitmap *backbmp = new CBitmap("hslider.png");
@@ -105,18 +104,57 @@ namespace Steinberg {
 			size.offset(x, y);   // 位置を設定(tergetframeの左上が0,0となる)
 
 			// スライダーの作成
-			//スライダーの背景にあわせて余白設定
+			// スライダーの背景にあわせて余白設定
 			int bmpmargin = 0;
 			CHorizontalSlider* control = new CHorizontalSlider(size, this, tag,
 				x + bmpmargin,
 				x + backbmp->getWidth() - (handlebmp->getWidth() + bmpmargin),
 				handlebmp, backbmp);
 
+
+			// ハンドルの動きを左から右に
+			control->setStyle(CSlider::Style::kLeft | CSlider::Style::kHorizontal);
+
 			// パラメータの現在の値を取得し、コントローラに反映
 			ParamValue value = controller->getParamNormalized(tag);
 			control->setValueNormalized(value);
 
 			// スライダーをフレームに登録
+			frame->addView(control);
+
+			// 読み込んだ画像は忘れず解放
+			backbmp->forget();
+			handlebmp->forget();
+
+		}
+
+		// =================================================================================
+		// 縦型スライダー作成関数
+		// =================================================================================
+		void MyVSTGUIEditor::createVSlider(ParamID tag, int x, int y)
+		{
+			// 画像ファイルを読み込み
+			CBitmap *backbmp = new CBitmap("vslider.png");
+			CBitmap *handlebmp = new CBitmap("vslider_handle.png");
+
+			// 画像サイズ取得
+			CRect  size;
+			size(0, 0, backbmp->getWidth(), backbmp->getHeight());
+			size.offset(x, y);   // 位置を設定(tergetframeの左上が0,0となる)
+
+			// スライダーの作成
+			// スライダーの背景にあわせて余白設定
+			int bmpmargin = 0;
+			CVerticalSlider* control = new CVerticalSlider(size, this, tag,
+				y + bmpmargin,
+				y + backbmp->getHeight() - (handlebmp->getHeight() + bmpmargin),
+				handlebmp, backbmp);
+
+			// パラメータの現在の値を取得し、コントローラに反映
+			ParamValue value = controller->getParamNormalized(tag);
+			control->setValueNormalized(value);
+
+			// ノブをフレームに登録
 			frame->addView(control);
 
 			// 読み込んだ画像は忘れず解放

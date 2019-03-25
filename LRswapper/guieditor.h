@@ -33,7 +33,8 @@ namespace Steinberg {
 
 
 			// スライダー作成関数
-			void createSlider(ParamID tag, int x, int y);
+			void createHSlider(ParamID tag, int x, int y);
+			void createVSlider(ParamID tag, int x, int y);
 
 			// VSTGUIEditorクラスの各種設定を自作GUIクラス置き換えるマクロ
 			DELEGATE_REFCOUNT(VSTGUIEditor)
