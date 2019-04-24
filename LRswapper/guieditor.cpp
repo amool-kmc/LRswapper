@@ -93,7 +93,7 @@ namespace Steinberg {
 		// =================================================================================
 		// 横型スライダー作成関数
 		// =================================================================================
-		void MyVSTGUIEditor::createHSlider(ParamID tag, int x, int y)
+		CControl* MyVSTGUIEditor::createHSlider(ParamID tag, int x, int y)
 		{
 			// 画像ファイルを読み込み
 			CBitmap *backbmp = new CBitmap("hslider.png");
@@ -127,12 +127,13 @@ namespace Steinberg {
 			backbmp->forget();
 			handlebmp->forget();
 
+			return control;
 		}
 
 		// =================================================================================
 		// 縦型スライダー作成関数
 		// =================================================================================
-		void MyVSTGUIEditor::createVSlider(ParamID tag, int x, int y)
+		CControl* MyVSTGUIEditor::createVSlider(ParamID tag, int x, int y)
 		{
 			// 画像ファイルを読み込み
 			CBitmap *backbmp = new CBitmap("vslider.png");
@@ -162,6 +163,33 @@ namespace Steinberg {
 			backbmp->forget();
 			handlebmp->forget();
 
+			return control;
+		}
+
+		CControl* MyVSTGUIEditor::createTextLabel(int x, int y, UTF8StringPtr text)
+		{
+			// テキストラベルコントロールを作成する
+
+			// コントロールのサイズを設定(サイズは適当)
+			CRect  size;
+			size(0, 0, 80, 16);
+			size.offset(x, y);   // 位置を設定(frameの左上が0,0となる)
+
+			// コントロール作成
+			CTextLabel* control = new CTextLabel(size, text);
+
+			// 小型フォントを指定
+			control->setFont(kNormalFontSmaller);
+
+			// 文字色・背景色を設定
+			control->setFontColor(kBlackCColor);
+			control->setBackColor(kWhiteCColor);
+			control->setFrameColor(kGreyCColor);
+
+			// コントロールをフレームに登録
+			frame->addView(control);
+
+			return control;
 		}
 	}
 }

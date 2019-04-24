@@ -8,6 +8,8 @@
 // include original file
 #include "tag.h"
 
+// 危険かもしれない
+using namespace VSTGUI;
 
 // VST3作成に必要なの名前空間を使用
 namespace Steinberg {
@@ -33,8 +35,10 @@ namespace Steinberg {
 
 
 			// スライダー作成関数
-			void createHSlider(ParamID tag, int x, int y);
-			void createVSlider(ParamID tag, int x, int y);
+			CControl* createHSlider(ParamID tag, int x, int y);
+			CControl* createVSlider(ParamID tag, int x, int y);
+
+			CControl* createTextLabel(int x, int y, UTF8StringPtr text);
 
 			// VSTGUIEditorクラスの各種設定を自作GUIクラス置き換えるマクロ
 			DELEGATE_REFCOUNT(VSTGUIEditor)
