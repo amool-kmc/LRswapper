@@ -8,43 +8,43 @@
 // include original file
 #include "tag.h"
 
-// ŠëŒ¯‚©‚à‚µ‚ê‚È‚¢
+// å±é™ºã‹ã‚‚ã—ã‚Œãªã„
 using namespace VSTGUI;
 
-// VST3ì¬‚É•K—v‚È‚Ì–¼‘O‹óŠÔ‚ğg—p
+// VST3ä½œæˆã«å¿…è¦ãªã®åå‰ç©ºé–“ã‚’ä½¿ç”¨
 namespace Steinberg {
 	namespace Vst {
 
 		// ============================================================================================
-		// VST‚ÌGUIƒNƒ‰ƒX
+		// VSTã®GUIã‚¯ãƒ©ã‚¹
 		// ============================================================================================
 		class MyVSTGUIEditor : public VSTGUIEditor, public VSTGUI::IControlListener
 		{
 		public:
-			// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 			MyVSTGUIEditor(void* controller);
 
-			// GUIƒEƒBƒ“ƒhƒE‚ğŠJ‚¢‚½‚Æ‚«‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”
+			// GUIã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã„ãŸã¨ãã«å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°
 			virtual bool PLUGIN_API open(void* parent, const VSTGUI::PlatformType& platformType = VSTGUI::kDefaultNative);
 
-			// GUIƒEƒBƒ“ƒhƒE‚ğ•Â‚¶‚½‚Æ‚«‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”
+			// GUIã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ãŸã¨ãã«å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°
 			virtual void PLUGIN_API close();
 
-			// GUIƒEƒBƒ“ƒhƒE‚ÌƒRƒ“ƒgƒ[ƒ‰‚ğ‘€ì‚µ‚½‚Æ‚«‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”
+			// GUIã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã‚’æ“ä½œã—ãŸã¨ãã«å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°
 			void valueChanged(VSTGUI::CControl* pControl);
 
 
-			// ƒXƒ‰ƒCƒ_[ì¬ŠÖ”
+			// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ä½œæˆé–¢æ•°
 			CControl* createHSlider(ParamID tag, int x, int y);
 			CControl* createVSlider(ParamID tag, int x, int y);
 
 			CControl* createTextLabel(int x, int y, UTF8StringPtr text);
 
-			// VSTGUIEditorƒNƒ‰ƒX‚ÌŠeíİ’è‚ğ©ìGUIƒNƒ‰ƒX’u‚«Š·‚¦‚éƒ}ƒNƒ
+			// VSTGUIEditorã‚¯ãƒ©ã‚¹ã®å„ç¨®è¨­å®šã‚’è‡ªä½œGUIã‚¯ãƒ©ã‚¹ç½®ãæ›ãˆã‚‹ãƒã‚¯ãƒ­
 			DELEGATE_REFCOUNT(VSTGUIEditor)
 		};
 
 	}
-} // namespace Steinberg‚ÆVst‚ÌI‚í‚è
+} // namespace Steinbergã¨Vstã®çµ‚ã‚ã‚Š
 
 #endif
