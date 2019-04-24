@@ -1,70 +1,70 @@
 // include original file
 #include "guieditor.h"
 
-// ŠëŒ¯‚©‚à‚µ‚ê‚È‚¢
+// å±é™ºã‹ã‚‚ã—ã‚Œãªã„
 using namespace VSTGUI;
 
 namespace Steinberg {
 	namespace Vst {
 		// =================================================================================
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		// =================================================================================
 		MyVSTGUIEditor::MyVSTGUIEditor(void* controller) 
 			: VSTGUIEditor(controller)
 		{
-			// ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ðÝ’è
-			// Ý’è‚µ‚È‚¯‚ê‚ÎAƒEƒBƒ“ƒhƒE‚ªŠJ‚©‚È‚¢
+			// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’è¨­å®š
+			// è¨­å®šã—ãªã‘ã‚Œã°ã€ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒé–‹ã‹ãªã„
 			ViewRect viewRect(0, 0, H_WINDOWSIZE, V_WINDOWSIZE);
 			setRect(viewRect);
 		}
 
 		// =================================================================================
-		// openŽž‚ÉŒÄ‚Î‚ê‚éŠÖ”
+		// openæ™‚ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°
 		// =================================================================================
 		bool PLUGIN_API MyVSTGUIEditor::open(void* parent, const PlatformType& platformType)
 		{
-			// GUIƒEƒBƒ“ƒhƒE‚ªŠJ‚©‚ê‚½‚Æ‚«‚ÉAUI‚ðì¬‚·‚é
+			// GUIã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒé–‹ã‹ã‚ŒãŸã¨ãã«ã€UIã‚’ä½œæˆã™ã‚‹
 
-			// ƒtƒŒ[ƒ€(”z’u—Ìˆæ)‚ª‚·‚Å‚Éì¬EÝ’è‚³‚ê‚Ä‚¢‚éê‡(frame‚ªNULL‚Å‚È‚¢ê‡)‚ÍI—¹
-			// frame‚ÍŒp³Œ³ƒNƒ‰ƒX‚Å’è‹`‚³‚ê‚Ä‚¢‚éB
+			// ãƒ•ãƒ¬ãƒ¼ãƒ (é…ç½®é ˜åŸŸ)ãŒã™ã§ã«ä½œæˆãƒ»è¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆ(frameãŒNULLã§ãªã„å ´åˆ)ã¯çµ‚äº†
+			// frameã¯ç¶™æ‰¿å…ƒã‚¯ãƒ©ã‚¹ã§å®šç¾©ã•ã‚Œã¦ã„ã‚‹ã€‚
 			if (frame) { return false; }
 
-			// ì¬‚·‚éƒtƒŒ[ƒ€‚ÌƒTƒCƒY‚ðÝ’èiŠî–{“I‚ÉGUIƒEƒBƒ“ƒhƒE‚Æ“¯‚¶j
+			// ä½œæˆã™ã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®ã‚µã‚¤ã‚ºã‚’è¨­å®šï¼ˆåŸºæœ¬çš„ã«GUIã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã¨åŒã˜ï¼‰
 			CRect size(0, 0, H_WINDOWSIZE, V_WINDOWSIZE);
 
-			// ƒtƒŒ[ƒ€‚ðì¬Bì¬‚ÉŽ¸”s‚µ‚½‚ç(NULL‚È‚ç)I—¹B
-			// ˆø”‚É‚ÍAƒtƒŒ[ƒ€ƒTƒCƒYAŽ©ìGUIƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^‚ðŽw’è‚·‚é
+			// ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ä½œæˆã€‚ä½œæˆã«å¤±æ•—ã—ãŸã‚‰(NULLãªã‚‰)çµ‚äº†ã€‚
+			// å¼•æ•°ã«ã¯ã€ãƒ•ãƒ¬ãƒ¼ãƒ ã‚µã‚¤ã‚ºã€è‡ªä½œGUIã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã‚’æŒ‡å®šã™ã‚‹
 			frame = new CFrame(size, this);
 			if (frame == NULL) { return false; }
 
-			// ì¬‚µ‚½ƒtƒŒ[ƒ€‚É”wŒi‰æ‘œ‚ðÝ’è
-			CBitmap* cbmp = new CBitmap("background.png"); // ƒŠƒ\[ƒX‚©‚ç”wŒi‰æ‘œ‚ð“Ç‚Ýž‚Þ
-			frame->setBackground(cbmp); // ƒtƒŒ[ƒ€‚É”wŒi‰æ‘œ‚ðÝ’è
-			cbmp->forget();	// ƒtƒŒ[ƒ€‚ÉÝ’èŒã‚Í”wŒi‰æ‘œ‚Íforget‚Å‰ð•ú‚µ‚Ä‚¨‚­
+			// ä½œæˆã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ ã«èƒŒæ™¯ç”»åƒã‚’è¨­å®š
+			CBitmap* cbmp = new CBitmap("background.png"); // ãƒªã‚½ãƒ¼ã‚¹ã‹ã‚‰èƒŒæ™¯ç”»åƒã‚’èª­ã¿è¾¼ã‚€
+			frame->setBackground(cbmp); // ãƒ•ãƒ¬ãƒ¼ãƒ ã«èƒŒæ™¯ç”»åƒã‚’è¨­å®š
+			cbmp->forget();	// ãƒ•ãƒ¬ãƒ¼ãƒ ã«è¨­å®šå¾Œã¯èƒŒæ™¯ç”»åƒã¯forgetã§è§£æ”¾ã—ã¦ãŠã
 
-			// ì¬‚µ‚½ƒtƒŒ[ƒ€‚ðŠJ‚­
+			// ä½œæˆã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ ã‚’é–‹ã
 			frame->open(parent);
 
 
-			// ƒRƒ“ƒgƒ[ƒ‰[UI‚Ì’Ç‰Á---------------------------------
+			// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼UIã®è¿½åŠ ---------------------------------
 			createHSlider(R_PAN_TAG, 150, 127);
 			createHSlider(L_PAN_TAG, 150, 177);
 			createVSlider(R_VOLUME_TAG, 690, 265);
 			createVSlider(L_VOLUME_TAG, 290, 265);
 
-			// GUIƒEƒBƒ“ƒhƒE‚ÌƒI[ƒvƒ“‚É¬Œ÷‚µ‚½ê‡‚Ítrue‚ð•Ô‚·
+			// GUIã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚ªãƒ¼ãƒ—ãƒ³ã«æˆåŠŸã—ãŸå ´åˆã¯trueã‚’è¿”ã™
 			return true;
 		}
 
 		// =================================================================================
-		// closeŽž‚ÉŒÄ‚Î‚ê‚éŠÖ”
+		// closeæ™‚ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°
 		// =================================================================================
 		void PLUGIN_API MyVSTGUIEditor::close()
 		{
-			// GUIƒEƒBƒ“ƒhƒE‚ª•Â‚¶‚½‚Æ‚«‚ÉAUI‚ðíœ‚·‚é
+			// GUIã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒé–‰ã˜ãŸã¨ãã«ã€UIã‚’å‰Šé™¤ã™ã‚‹
 
-			// ƒtƒŒ[ƒ€‚ð‰ð•ú
-			// ”wŒi‰æ‘œ‚â’Ç‰Á‚µ‚½‚Â‚Ü‚Ý(ƒmƒuj‚âƒXƒ‰ƒCƒ_[‚È‚Ç‚à‚ ‚í‚¹‚Ä‰ð•ú‚³‚ê‚é
+			// ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’è§£æ”¾
+			// èƒŒæ™¯ç”»åƒã‚„è¿½åŠ ã—ãŸã¤ã¾ã¿(ãƒŽãƒ–ï¼‰ã‚„ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ãªã©ã‚‚ã‚ã‚ã›ã¦è§£æ”¾ã•ã‚Œã‚‹
 			if (frame)
 			{
 				frame->forget();
@@ -73,39 +73,39 @@ namespace Steinberg {
 		}
 
 		// =================================================================================
-		// ƒRƒ“ƒgƒ[ƒ‰[‘€ìŽž‚ÉŒÄ‚Î‚ê‚éŠÖ”
+		// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼æ“ä½œæ™‚ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°
 		// =================================================================================
 		void MyVSTGUIEditor::valueChanged(CControl* pControl)
 		{
-			// ‚Ç‚Ìƒpƒ‰ƒ[ƒ^[‚ª‘€ì‚³‚ê‚½‚©‚ðŽæ“¾‚·‚éB
+			// ã©ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ãŒæ“ä½œã•ã‚ŒãŸã‹ã‚’å–å¾—ã™ã‚‹ã€‚
 			int32 index = pControl->getTag();
 
-			// ƒpƒ‰ƒ[ƒ^[‚Ì’l‚ðŽæ“¾‚·‚éB
+			// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã®å€¤ã‚’å–å¾—ã™ã‚‹ã€‚
 			float value = pControl->getValueNormalized();
 
-			// Žæ“¾‚µ‚½’l‚ðƒpƒ‰ƒ[ƒ^[‚É”½‰f‚³‚¹‚é
+			// å–å¾—ã—ãŸå€¤ã‚’ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã«åæ˜ ã•ã›ã‚‹
 			controller->setParamNormalized(index, value);
 
-			// ‰¹ºˆ—ƒNƒ‰ƒX‚É”½‰f‚µ‚½’l‚ð’Ê’m‚·‚é
+			// éŸ³å£°å‡¦ç†ã‚¯ãƒ©ã‚¹ã«åæ˜ ã—ãŸå€¤ã‚’é€šçŸ¥ã™ã‚‹
 			controller->performEdit(index, value);
 		}
 
 		// =================================================================================
-		// ‰¡Œ^ƒXƒ‰ƒCƒ_[ì¬ŠÖ”
+		// æ¨ªåž‹ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ä½œæˆé–¢æ•°
 		// =================================================================================
 		CControl* MyVSTGUIEditor::createHSlider(ParamID tag, int x, int y)
 		{
-			// ‰æ‘œƒtƒ@ƒCƒ‹‚ð“Ç‚Ýž‚Ý
+			// ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿
 			CBitmap *backbmp = new CBitmap("hslider.png");
 			CBitmap *handlebmp = new CBitmap("hslider_handle.png");
 
-			// ‰æ‘œƒTƒCƒYŽæ“¾
+			// ç”»åƒã‚µã‚¤ã‚ºå–å¾—
 			CRect size;
 			size(0, 0, backbmp->getWidth(), backbmp->getHeight());
-			size.offset(x, y);   // ˆÊ’u‚ðÝ’è(tergetframe‚Ì¶ã‚ª0,0‚Æ‚È‚é)
+			size.offset(x, y);   // ä½ç½®ã‚’è¨­å®š(tergetframeã®å·¦ä¸ŠãŒ0,0ã¨ãªã‚‹)
 
-			// ƒXƒ‰ƒCƒ_[‚Ìì¬
-			// ƒXƒ‰ƒCƒ_[‚Ì”wŒi‚É‚ ‚í‚¹‚Ä—]”’Ý’è
+			// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®ä½œæˆ
+			// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®èƒŒæ™¯ã«ã‚ã‚ã›ã¦ä½™ç™½è¨­å®š
 			int bmpmargin = 0;
 			CHorizontalSlider* control = new CHorizontalSlider(size, this, tag,
 				x + bmpmargin,
@@ -113,58 +113,82 @@ namespace Steinberg {
 				handlebmp, backbmp);
 
 
-			// ƒnƒ“ƒhƒ‹‚Ì“®‚«‚ð¶‚©‚ç‰E‚É
+			// ãƒãƒ³ãƒ‰ãƒ«ã®å‹•ãã‚’å·¦ã‹ã‚‰å³ã«
 			control->setStyle(CSlider::Style::kLeft | CSlider::Style::kHorizontal);
 
-			// ƒpƒ‰ƒ[ƒ^‚ÌŒ»Ý‚Ì’l‚ðŽæ“¾‚µAƒRƒ“ƒgƒ[ƒ‰‚É”½‰f
+			// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®ç¾åœ¨ã®å€¤ã‚’å–å¾—ã—ã€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã«åæ˜ 
 			ParamValue value = controller->getParamNormalized(tag);
 			control->setValueNormalized(value);
 
-			// ƒXƒ‰ƒCƒ_[‚ðƒtƒŒ[ƒ€‚É“o˜^
+			// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ã«ç™»éŒ²
 			frame->addView(control);
 
-			// “Ç‚Ýž‚ñ‚¾‰æ‘œ‚Í–Y‚ê‚¸‰ð•ú
+			// èª­ã¿è¾¼ã‚“ã ç”»åƒã¯å¿˜ã‚Œãšè§£æ”¾
 			backbmp->forget();
 			handlebmp->forget();
-
 
 			return control;
 
 		}
 
 		// =================================================================================
-		// cŒ^ƒXƒ‰ƒCƒ_[ì¬ŠÖ”
+		// ç¸¦åž‹ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ä½œæˆé–¢æ•°
 		// =================================================================================
 		CControl* MyVSTGUIEditor::createVSlider(ParamID tag, int x, int y)
 		{
-			// ‰æ‘œƒtƒ@ƒCƒ‹‚ð“Ç‚Ýž‚Ý
+			// ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿
 			CBitmap *backbmp = new CBitmap("vslider.png");
 			CBitmap *handlebmp = new CBitmap("vslider_handle.png");
 
-			// ‰æ‘œƒTƒCƒYŽæ“¾
+			// ç”»åƒã‚µã‚¤ã‚ºå–å¾—
 			CRect size;
 			size(0, 0, backbmp->getWidth(), backbmp->getHeight());
-			size.offset(x, y);   // ˆÊ’u‚ðÝ’è(tergetframe‚Ì¶ã‚ª0,0‚Æ‚È‚é)
+			size.offset(x, y);   // ä½ç½®ã‚’è¨­å®š(tergetframeã®å·¦ä¸ŠãŒ0,0ã¨ãªã‚‹)
 
-			// ƒXƒ‰ƒCƒ_[‚Ìì¬
-			// ƒXƒ‰ƒCƒ_[‚Ì”wŒi‚É‚ ‚í‚¹‚Ä—]”’Ý’è
+			// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®ä½œæˆ
+			// ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®èƒŒæ™¯ã«ã‚ã‚ã›ã¦ä½™ç™½è¨­å®š
 			int bmpmargin = 0;
 			CVerticalSlider* control = new CVerticalSlider(size, this, tag,
 				y + bmpmargin,
 				y + backbmp->getHeight() - (handlebmp->getHeight() + bmpmargin),
 				handlebmp, backbmp);
 
-			// ƒpƒ‰ƒ[ƒ^‚ÌŒ»Ý‚Ì’l‚ðŽæ“¾‚µAƒRƒ“ƒgƒ[ƒ‰‚É”½‰f
+			// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®ç¾åœ¨ã®å€¤ã‚’å–å¾—ã—ã€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã«åæ˜ 
 			ParamValue value = controller->getParamNormalized(tag);
 			control->setValueNormalized(value);
 
-			// ƒmƒu‚ðƒtƒŒ[ƒ€‚É“o˜^
+			// ãƒŽãƒ–ã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ã«ç™»éŒ²
 			frame->addView(control);
 
-			// “Ç‚Ýž‚ñ‚¾‰æ‘œ‚Í–Y‚ê‚¸‰ð•ú
+			// èª­ã¿è¾¼ã‚“ã ç”»åƒã¯å¿˜ã‚Œãšè§£æ”¾
 			backbmp->forget();
 			handlebmp->forget();
 
+			return control;
+		}
+
+		CControl* MyVSTGUIEditor::createTextLabel(int x, int y, UTF8StringPtr text)
+		{
+			// ãƒ†ã‚­ã‚¹ãƒˆãƒ©ãƒ™ãƒ«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ä½œæˆã™ã‚‹
+
+			// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ã‚µã‚¤ã‚ºã‚’è¨­å®š(ã‚µã‚¤ã‚ºã¯é©å½“)
+			CRect  size;
+			size(0, 0, 80, 16);
+			size.offset(x, y);   // ä½ç½®ã‚’è¨­å®š(frameã®å·¦ä¸ŠãŒ0,0ã¨ãªã‚‹)
+
+			// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ä½œæˆ
+			CTextLabel* control = new CTextLabel(size, text);
+
+			// å°åž‹ãƒ•ã‚©ãƒ³ãƒˆã‚’æŒ‡å®š
+			control->setFont(kNormalFontSmaller);
+
+			// æ–‡å­—è‰²ãƒ»èƒŒæ™¯è‰²ã‚’è¨­å®š
+			control->setFontColor(kBlackCColor);
+			control->setBackColor(kWhiteCColor);
+			control->setFrameColor(kGreyCColor);
+
+			// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ã«ç™»éŒ²
+			frame->addView(control);
 
 			return control;
 		}
